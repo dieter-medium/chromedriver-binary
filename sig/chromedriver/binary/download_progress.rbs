@@ -1,0 +1,14 @@
+module Chromedriver
+  module Binary
+    class DownloadProgress
+      def initialize: (
+          logger: untyped, # Typically Logger, but untyped for flexibility
+          step_bytes: Integer
+        ) -> void
+
+      def track: (Integer) -> void
+
+      def finish: () -> void
+    end
+  end
+end

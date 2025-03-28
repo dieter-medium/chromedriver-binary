@@ -1,0 +1,7 @@
+module Chromedriver
+  module Binary
+    module VersionResolver
+      def normalize_version: -> untyped
+    end
+  end
+end

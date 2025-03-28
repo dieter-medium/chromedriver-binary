@@ -1,0 +1,7 @@
+module Chromedriver
+  module Binary
+    module SystemHelper
+      def call: -> untyped
+    end
+  end
+end

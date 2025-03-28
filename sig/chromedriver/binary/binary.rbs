@@ -1,0 +1,40 @@
+module Chromedriver
+  module Binary
+    @logger: Logger
+
+    @install_dir: String
+
+    DEFAULT_INSTALL_DIR: String
+    VERSION: String
+
+    attr_writer self.install_dir: String
+    attr_accessor self.logger: Logger
+
+    attr_accessor self.proxy_addr: String
+
+    attr_accessor self.proxy_port: Integer
+
+    attr_accessor self.proxy_user: String
+
+    attr_accessor self.proxy_pass: String
+
+    #
+    # Returns the install (download) directory path for the drivers.
+    #
+    # @return [String]
+    def self.install_dir: () -> String
+
+    #
+    # Provides a convenient way to configure the gem.
+    #
+    # @example Configure proxy and cache_time
+    #   Chromedriver::Binary.configure do |config|
+    #     config.proxy_addr = 'myproxy_address.com'
+    #     config.proxy_port = '8080'
+    #     config.proxy_user = 'username'
+    #     config.proxy_pass = 'password'
+    #   end
+    #
+    def self.configure: () { (untyped) -> untyped } -> untyped
+  end
+end

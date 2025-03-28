@@ -1,0 +1,9 @@
+module Chromedriver
+  module Binary
+    module Platform
+      def platform: -> untyped
+
+      def platform_id: -> untyped
+    end
+  end
+end

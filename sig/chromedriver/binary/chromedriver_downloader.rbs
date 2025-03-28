@@ -1,0 +1,18 @@
+module Chromedriver
+  module Binary
+    class ChromedriverDownloader
+      extend VersionResolver
+      extend Platform
+      extend DownloaderHelper
+      extend SystemHelper
+
+      def self.install_dir: () -> String
+
+      def self.driver_path: () -> String
+
+      def self.update: (?force: bool) -> String
+
+      def self.correct_binary?: () -> bool
+    end
+  end
+end

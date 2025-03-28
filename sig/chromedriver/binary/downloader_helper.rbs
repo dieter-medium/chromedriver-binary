@@ -1,0 +1,13 @@
+module Chromedriver
+  module Binary
+    module DownloaderHelper
+      def download_file: (String, String) -> void
+
+      def extract_zip: (String, String) -> void
+
+      private
+
+      def log_proxy_info: (Net::HTTP, untyped) -> void
+    end
+  end
+end
