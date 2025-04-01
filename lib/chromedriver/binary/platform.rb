@@ -39,7 +39,7 @@ module Chromedriver
         case platform
         when "win32"
           "win32"
-        when "linux"
+        when "linux64"
           "linux64"
         when "mac64"
           # If you're on an Apple Silicon Mac, check Ruby platform for arm details.
