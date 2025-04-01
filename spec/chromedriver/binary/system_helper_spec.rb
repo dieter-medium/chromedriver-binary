@@ -16,9 +16,9 @@ RSpec.describe Chromedriver::Binary::SystemHelper do
     it "executes command without argument" do
       allow(system_helper).to receive(:capture).with("ls")
                                                .and_return([
-                                                             "output",
-                                                             instance_double(Process::Status, success?: true)
-                                                           ])
+                                                 "output",
+                                                 instance_double(Process::Status, success?: true)
+                                               ])
 
       expect(system_helper.call("ls")).to eq("output")
     end

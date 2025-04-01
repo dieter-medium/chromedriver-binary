@@ -20,11 +20,24 @@ RSpec/ExampleLength:
 Layout/MultilineMethodCallIndentation:
   Enabled: false
 
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
 RSpec/MultipleMemoizedHelpers:
   Max: 10
 
 Metrics/MethodLength:
   Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Max: 10
+
 
 Gemspec/DevelopmentDependencies:
   EnforcedStyle: gemspec

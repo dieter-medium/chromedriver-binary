@@ -70,7 +70,7 @@ module Chromedriver
         end
 
         def prepare_install_dir
-          FileUtils.mkdir_p(install_dir) unless File.exist?(install_dir)
+          FileUtils.mkdir_p(install_dir)
         end
 
         def log_download_start(version, url)

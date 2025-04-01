@@ -43,7 +43,7 @@ RSpec.describe Chromedriver::Binary::DownloaderHelper do
         Port: 0,
         DocumentRoot: root,
         AccessLog: [],
-        Logger: WEBrick::Log.new("/dev/null")
+        Logger: WEBrick::Log.new(File::NULL)
       )
 
       @server_thread = Thread.new { @server.start }

@@ -32,7 +32,7 @@ module Chromedriver
       private
 
       def chrome_bin_from_env
-        ENV["CHROMEDRIVER_CHROME_PATH"]
+        ENV.fetch("CHROMEDRIVER_CHROME_PATH", nil)
       end
 
       def find_in_paths(directories, files)

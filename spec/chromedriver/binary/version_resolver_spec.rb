@@ -28,7 +28,7 @@ RSpec.describe Chromedriver::Binary::VersionResolver do
       allow(resolver).to receive(:browser_version).and_return(Gem::Version.new("99.0.4844"))
 
       allow(resolver).to receive(:fetch_data).with("latest-patch-versions-per-build.json").and_return(
-        { builds: { '99.0.4844': { version: "99.0.4844.51" } } }
+        { builds: { "99.0.4844": { version: "99.0.4844.51" } } }
       )
 
       expect(resolver.latest_patch_version_for_build).to eq("99.0.4844.51")
