@@ -19,9 +19,7 @@ namespace :chromedriver do
     desc "Remove and download updated chromedriver if necessary"
     task :update do
       Chromedriver::Binary::ChromedriverDownloader.update force: true
-      # rubocop:disable Layout/LineLength
       Chromedriver::Binary.logger.info "Updated to chromedriver #{Chromedriver::Binary::ChromedriverDownloader.current_installed_version}"
-      # rubocop:enable Layout/LineLength
     end
   end
 end

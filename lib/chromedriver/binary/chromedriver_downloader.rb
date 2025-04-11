@@ -32,6 +32,15 @@ module Chromedriver
         def update(force: false)
           return driver_path if up_to_date_binary?(force)
 
+          Chromedriver::Binary.logger.warn(<<-EOF_WARNING) if linux_arm64?
+
+             WARNING: The Linux ARM64 version of ChromeDriver is not officially supported by Google.
+             Please use the OS version of ChromeDriver instead.
+             For instance on Ubuntu, use the `chromium-driver` package and link it to #{driver_path}.
+             `apt-get update && apt-get install chromium-driver`
+             `mkdir -p #{install_dir} && ln -s /usr/bin/chromedriver #{driver_path}`
+          EOF_WARNING
+
           version = latest_patch_version_for_build
           zip_filename = "chromedriver_#{platform_id}.zip"
           zip_path = File.join(install_dir, zip_filename)

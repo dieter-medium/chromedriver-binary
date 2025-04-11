@@ -4,7 +4,6 @@ require "webrick"
 require "fileutils"
 require "stringio"
 
-# rubocop:disable RSpec/InstanceVariable, RSpec/BeforeAfterAll
 RSpec.describe Chromedriver::Binary::DownloaderHelper do
   subject(:download_helper) { Object.new.tap { |sub| sub.extend(described_class) } }
 
@@ -84,4 +83,3 @@ RSpec.describe Chromedriver::Binary::DownloaderHelper do
     end
   end
 end
-# rubocop:enable RSpec/InstanceVariable, RSpec/BeforeAfterAll

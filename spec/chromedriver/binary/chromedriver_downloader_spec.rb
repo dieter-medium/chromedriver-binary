@@ -48,8 +48,6 @@ RSpec.describe Chromedriver::Binary::ChromedriverDownloader do
   describe ".update" do
     before do
       described_class.update(force: true)
-      log_output.rewind
-      @logs = log_output.read
     end
 
     it "creates the driver file" do
@@ -63,6 +61,21 @@ RSpec.describe Chromedriver::Binary::ChromedriverDownloader do
 
     it "cleans up the zip file" do
       expect(File).not_to exist(zip_path)
+    end
+  end
+
+  context "when os is linux and arch arm64" do
+    describe ".update" do
+      before do
+        allow(described_class).to receive(:linux_arm64?).and_return(true)
+        described_class.update(force: true)
+        log_output.rewind
+        @logs = log_output.read
+      end
+
+      it "warns if the os is linux and the architecture is not supported" do
+        expect(@logs).to include("The Linux ARM64 version of ChromeDriver is not officially supported by Google")
+      end
     end
   end
 end

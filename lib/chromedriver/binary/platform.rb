@@ -30,6 +30,11 @@ module Chromedriver
         end
       end
 
+      def linux_arm64?
+        RbConfig::CONFIG["host_os"].downcase.include?("linux") &&
+          RbConfig::CONFIG["host_cpu"].downcase.include?("aarch64")
+      end
+
       def file_name
         platform_id == "win32" ? "chromedriver.exe" : "chromedriver"
       end

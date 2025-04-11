@@ -20,11 +20,29 @@ RSpec/ExampleLength:
 Layout/MultilineMethodCallIndentation:
   Enabled: false
 
+Layout/FirstArgumentIndentation:
+  Enabled: false
+
+Layout/ClosingParenthesisIndentation:
+  Enabled: false
+
 Layout/FirstHashElementIndentation:
   EnforcedStyle: consistent
 
 Layout/FirstArrayElementIndentation:
-  EnforcedStyle: consistent
+  Enabled: false
+
+Layout/MultilineOperationIndentation:
+  Enabled: false
+
+Layout/BeginEndAlignment:
+  Enabled: false
+
+Layout/ArrayAlignment:
+  Enabled: false
+
+Layout/LineLength:
+  Enabled: false
 
 RSpec/MultipleMemoizedHelpers:
   Max: 10
@@ -41,6 +59,22 @@ Metrics/ParameterLists:
 
 Gemspec/DevelopmentDependencies:
   EnforcedStyle: gemspec
+
+RSpec/InstanceVariable:
+  Enabled: false
+
+RSpec/BeforeAfterAll:
+  Enabled: false
+
+RSpec/SpecFilePathFormat:
+  Enabled: true
+  Exclude:
+    - 'spec/acceptance/**/*_spec.rb'
+
+RSpec/DescribeClass:
+  Enabled: true
+  Exclude:
+    - 'spec/acceptance/**/*_spec.rb'
 
 plugins:
   - rubocop-rake
