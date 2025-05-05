@@ -1,5 +1,11 @@
 ## [Unreleased]
 
+## [0.1.3] - 2025-05-05
+
+### 🐛 Fixed
+
+- Removen unnecessary Exception handling in the `Chromedriver::Binary::ChromedriverDownloader` class.
+
 ## [0.1.2] - 2025-04-11
 
 ### 🐛 Fixed
