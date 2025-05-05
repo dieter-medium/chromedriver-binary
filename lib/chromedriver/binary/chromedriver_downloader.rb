@@ -63,7 +63,7 @@ module Chromedriver
 
         def correct_binary?
           current_installed_version == browser_version || current_installed_version == latest_patch_version_for_build
-        rescue ConnectionError, VersionError
+        rescue VersionError
           false
         end
 
