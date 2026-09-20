@@ -9,3 +9,7 @@
 
 # rspec failure tracking
 .rspec_status
+
+# Per-operator local devbox tooling (Docker images/Makefile for rspec + a release shell) - never
+# committed to the gem repo, matching bidi2pdf's own docker-claude/.
+/docker-claude/
