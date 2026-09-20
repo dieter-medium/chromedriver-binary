@@ -26,7 +26,8 @@ RSpec.describe Chromedriver::Binary::ChromedriverDownloader do
 
     allow(described_class).to receive(:download_file) do |_, destination|
       # Create a fake zip with a dummy 'chromedriver' binary inside
-      Zip::File.open(destination, Zip::File::CREATE) do |zipfile|
+      # rubyzip 3.0 replaced the Zip::File::CREATE flag with a `create:` keyword.
+      Zip::File.open(destination, create: true) do |zipfile|
         zipfile.get_output_stream("chromedriver") { |f| f.write("dummy binary") }
       end
     end

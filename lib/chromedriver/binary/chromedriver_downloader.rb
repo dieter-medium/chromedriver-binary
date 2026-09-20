@@ -34,7 +34,7 @@ module Chromedriver
         def update(force: false)
           return driver_path if up_to_date_binary?(force)
 
-          return driver_path if linux_arm64? && link_system_driver
+          return driver_path if linux_arm64? && link_system_driver?
 
           Chromedriver::Binary.logger.warn(<<-EOF_WARNING) if linux_arm64?
 
@@ -79,7 +79,7 @@ module Chromedriver
         # matches the installed browser before trusting it - a found binary that's the wrong
         # version is no better than none, so it's unlinked again rather than left in place for
         # #update to fall through to the (still doomed, but at least unambiguous) download.
-        def link_system_driver
+        def link_system_driver?
           source = system_driver_path
           return false unless source
 

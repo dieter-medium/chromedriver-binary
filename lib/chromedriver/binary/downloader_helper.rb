@@ -36,9 +36,16 @@ module Chromedriver
       def extract_zip(zip_file, destination)
         Zip::File.open(zip_file) do |zip|
           zip.each do |entry|
-            # Extract all files as top-level (ignoring any folder structure)
+            next unless entry.file?
+
+            # Extract all files as top-level (ignoring any folder structure). Writes the entry's
+            # bytes directly rather than calling Entry#extract - that method's own destination
+            # argument is not stable across rubyzip major versions: 2.x took a full destination
+            # path as its first positional arg, 3.x repurposed that arg as a path *relative to* a
+            # separate destination_directory: keyword, silently mangling an absolute path passed
+            # the old way (confirmed live: doubled into ".../chromedriver-binary/chromedriver-binary/...").
             destination_file = File.join(destination, File.basename(entry.name))
-            entry.extract(destination_file) { true }
+            File.binwrite(destination_file, entry.get_input_stream.read)
           end
         end
       rescue StandardError => e

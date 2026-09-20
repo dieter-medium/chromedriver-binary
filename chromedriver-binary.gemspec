@@ -41,7 +41,7 @@ Gem::Specification.new do |spec|
   # otherwise raises LoadError there. Declaring it keeps `required_ruby_version` (>= 3.0.0) true on
   # both without bumping the floor.
   spec.add_dependency "logger"
-  spec.add_dependency "rubyzip", "~> 2.4"
+  spec.add_dependency "rubyzip", ">= 2.4", "< 4.0"
 
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.0"
