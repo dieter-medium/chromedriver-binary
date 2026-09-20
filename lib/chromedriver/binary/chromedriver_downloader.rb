@@ -87,12 +87,10 @@ module Chromedriver
           FileUtils.ln_sf(source, driver_path)
 
           if correct_binary?
-            Chromedriver::Binary.logger.info "Linked system chromedriver #{source} to #{driver_path} " \
-                                               "(Linux ARM64 has no official Google build)"
+            Chromedriver::Binary.logger.info "Linked system chromedriver #{source} to #{driver_path} (Linux ARM64 has no official Google build)"
             true
           else
-            Chromedriver::Binary.logger.debug "#{source} exists but its version doesn't match the browser - " \
-                                                "removing the link and falling back to the official download"
+            Chromedriver::Binary.logger.debug "#{source} exists but its version doesn't match the browser - removing the link and falling back to the official download"
             FileUtils.rm_f(driver_path)
             false
           end
