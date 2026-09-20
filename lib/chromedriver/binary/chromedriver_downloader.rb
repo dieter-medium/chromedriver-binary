@@ -5,6 +5,7 @@ require_relative "version_resolver"
 require_relative "platform"
 require_relative "downloader_helper"
 require_relative "system_helper"
+require_relative "system_driver_locator"
 
 module Chromedriver
   module Binary
@@ -14,6 +15,7 @@ module Chromedriver
         include Platform
         include DownloaderHelper
         include SystemHelper
+        include SystemDriverLocator
 
         # Define where to install ChromeDriver.
         def install_dir
@@ -32,10 +34,14 @@ module Chromedriver
         def update(force: false)
           return driver_path if up_to_date_binary?(force)
 
+          return driver_path if linux_arm64? && link_system_driver?
+
           Chromedriver::Binary.logger.warn(<<-EOF_WARNING) if linux_arm64?
 
-             WARNING: The Linux ARM64 version of ChromeDriver is not officially supported by Google.
-             Please use the OS version of ChromeDriver instead.
+             WARNING: The Linux ARM64 version of ChromeDriver is not officially supported by Google,
+             and no working chromedriver was found automatically (checked CHROMEDRIVER_PATH and
+             #{SystemDriverLocator::SEARCH_DIRECTORIES.join(", ")}).
+             Please install the OS version of ChromeDriver instead.
              For instance on Ubuntu, use the `chromium-driver` package and link it to #{driver_path}.
              `apt-get update && apt-get install chromium-driver`
              `mkdir -p #{install_dir} && ln -s /usr/bin/chromedriver #{driver_path}`
@@ -68,6 +74,27 @@ module Chromedriver
         end
 
         private
+
+        # Symlinks a system-installed chromedriver into driver_path and verifies it actually
+        # matches the installed browser before trusting it - a found binary that's the wrong
+        # version is no better than none, so it's unlinked again rather than left in place for
+        # #update to fall through to the (still doomed, but at least unambiguous) download.
+        def link_system_driver?
+          source = system_driver_path
+          return false unless source
+
+          prepare_install_dir
+          FileUtils.ln_sf(source, driver_path)
+
+          if correct_binary?
+            Chromedriver::Binary.logger.info "Linked system chromedriver #{source} to #{driver_path} (Linux ARM64 has no official Google build)"
+            true
+          else
+            Chromedriver::Binary.logger.debug "#{source} exists but its version doesn't match the browser - removing the link and falling back to the official download"
+            FileUtils.rm_f(driver_path)
+            false
+          end
+        end
 
         def up_to_date_binary?(force)
           if correct_binary? && !force

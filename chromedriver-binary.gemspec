@@ -36,7 +36,12 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "rubyzip", "~> 2.4"
+  # Ruby 3.x ships logger as a default gem (silently available); Ruby 4.0 demoted it to a bundled
+  # gem that must be requested explicitly - lib/chromedriver/binary.rb's own `require "logger"`
+  # otherwise raises LoadError there. Declaring it keeps `required_ruby_version` (>= 3.0.0) true on
+  # both without bumping the floor.
+  spec.add_dependency "logger"
+  spec.add_dependency "rubyzip", ">= 2.4", "< 4.0"
 
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.0"
